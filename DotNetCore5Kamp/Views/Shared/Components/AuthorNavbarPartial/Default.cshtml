@@ -1,0 +1,80 @@
+﻿
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                    <img src="@ViewBag.image" alt="profile">
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">@ViewBag.name</span>
+                    <span class="text-secondary text-small">@ViewBag.userName</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Dashboard/Index/">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Author/Index/">
+                <span class="menu-title">Profilim</span>
+                <i class="mdi mdi-account-outline menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Blog/BlogListByAuthor/">
+                <span class="menu-title">Bloglarım</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Blog/BlogAdd/">
+                <span class="menu-title">Yeni Blog</span>
+                <i class="mdi mdi-hospital menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Message/Inbox/">
+                <span class="menu-title">Mesaj ~ Gelen Kutusu</span>
+                <i class="mdi mdi-message-text-outline menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Message/Sendbox/">
+                <span class="menu-title">Mesaj ~ Giden Kutusu</span>
+                <i class="mdi mdi-message-reply-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Notification/NotificationList/">
+                <span class="menu-title">Bildirimler</span>
+                <i class="mdi mdi-bell-outline menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Blog/Index/">
+                <span class="menu-title">Siteye Git</span>
+                <i class="mdi mdi-home-variant-outline menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Login/LogOut/">
+                <span class="menu-title">Çıkış Yap</span>
+                <i class="mdi mdi mdi-exit-to-app menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item sidebar-actions">
+            <span class="nav-link">
+                <div class="border-bottom">
+                    <h6 class="font-weight-normal mb-3">İşlemler</h6>
+                </div>
+                <a href="/Blog/BlogAdd/" class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Yeni Blog</a>
+                <a href="/Author/AuthorEditProfile/" style="margin-top: 10px !important;" class="btn btn-block btn-lg btn-gradient-dark mt-4">Ayarlar</a>
+            </span>
+        </li>
+    </ul>
+</nav>

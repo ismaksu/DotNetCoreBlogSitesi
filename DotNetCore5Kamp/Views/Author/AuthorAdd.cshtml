@@ -1,0 +1,73 @@
+﻿@model DotNetCore5Kamp.Models.AddProfileImage
+@{
+    ViewData["Title"] = "AuthorAdd";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yazar Profili</h4>
+            <p class="card-description"> Ekleme </p>
+            <form class="forms-sample" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleInputName1">Yazar Adı</label>
+                    @Html.TextBoxFor(x => x.AuthorName, new { @class = "form-control", @placeholder = "Yazar Adı Giriniz.." })
+                    @Html.ValidationMessageFor(x => x.AuthorName, "", new { @style = "color: red;" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Mail Adresi</label>
+                    @Html.TextBoxFor(x => x.AuthorMail, new { @class = "form-control", @placeholder = "Yazar Mailini Giriniz..", @type = "email" })
+                    @Html.ValidationMessageFor(x => x.AuthorMail, "", new { @style = "color: red;" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Şifre</label>
+                    @Html.TextBoxFor(x => x.AuthorPassword, new { @class = "form-control", @placeholder = "Şifre Belirleyiniz..", @type = "password", @id = "password1" })
+                    @Html.ValidationMessageFor(x => x.AuthorPassword, "", new { @style = "color: red;" })
+                </div>
+                <div class="form-group">
+                    <label>Şifreyi Yeniden Giriniz</label>
+                    @Html.TextBox("password2", "", new { @class = "form-control", @type = "password", @placeholder = "Şifreyi Yeniden Giriniz.." })
+                </div>
+                <div class="form-group">
+                    <div class="mb-3">
+                        <label>Yazar Resmi</label>
+                        <input name="AuthorImage" class="form-control" type="file" id="formFile" />
+                        @*<input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                @Html.TextBoxFor(x => x.AuthorImage, new { @class = "form-control file-upload-info", @placeholder = "Bir Resim Belirleyiniz..", @disabled = "true" })
+                                @Html.ValidationMessageFor(x => x.AuthorImage, "", new { @style = "color: red;" })
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Yükle</button>
+                                </span>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleTextarea1">Yazar Açıklama Kısmı</label>
+                    @Html.TextAreaFor(x => x.AuthorDesc, new { @class = "form-control", @rows = "4", @placeholder = "Yazar Açıklamasını Giriniz.." })
+                    @Html.ValidationMessageFor(x => x.AuthorDesc, "", new { @style = "color: red;" })
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Ekle</button>
+                <button class="btn btn-light">İptal</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Şifreler Uyuşmuyor");
+        else
+            document.getElementById("password2").setCustomValidity('');
+    }
+</script>

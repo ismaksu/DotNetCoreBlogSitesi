@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="~/BlogTema/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="~/BlogTema/css/contact.css" rel='stylesheet' type='text/css' />
+<link href="~/BlogTema/css/style.css" rel='stylesheet' type='text/css' />
+<link href="~/BlogTema/css/fontawesome-all.css" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+      rel="stylesheet">
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<section class="main-content-w3layouts-agileits">
+
+    <h3 class="tittle">Bizimle İletişime Geç</h3>
+    <p class="sub text-center">Görüşlerinize Değer Veriyoruz.</p>
+    <div class="contact-map inner-sec">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.551212757446!2d27.353417649865136!3d38.15062722455233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b95b2e6a9e0cc3%3A0x70f160d207c74684!2sTorbal%C4%B1%20Teknik%20Ve%20End%C3%BCstri%20Meslek%20Lisesi!5e0!3m2!1str!2str!4v1662034608517!5m2!1str!2str" class="map" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="ad-inf-sec bg-light text-center">
+        <h6>Burası da eski bir okulum.</h6>
+    </div>
+    <div class="container">
+        <div class="contact_grid_right">
+            @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @method = "post", @onsubmit = "return submitForm(this);" }))
+            {
+                <div class="row contact_left_grid">
+                    <div class="col-md-6 con-left">
+                        <div class="form-group">
+                            <label for="validationCustom01 my-2">İsminiz</label>
+                            <input class="form-control" type="text" name="ContactUserName" placeholder="" required="" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Mail Adresiniz</label>
+                            <input class="form-control" type="email" name="ContactMail" placeholder="" required="" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="validationCustom03 my-2">Konu</label>
+                            <input class="form-control" type="text" name="ContactTitle" placeholder="" required="" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md-6 con-right">
+                        <div class="form-group">
+                            <label for="textarea">Mesajınız</label>
+                            <textarea id="textarea" name="ContactMessage" placeholder=""></textarea>
+                        </div>
+                        <button id="#submitButton" class="btn btn-outline-info" formmethod="post" style="width: 100%; height: 53px;">Gönderin</button>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    function submitForm(form) {
+        swal("Mesajınız Başarıyla İletildi.", "Başarılı!", { button: "Tamamdır", icon: "success" })
+            .then((value) => {
+                if (value) {
+                    form.submit();
+                }
+            })
+
+    }
+</script>

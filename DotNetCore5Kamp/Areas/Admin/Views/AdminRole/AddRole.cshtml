@@ -1,0 +1,20 @@
+﻿@using DotNetCore5Kamp.Models
+@model RoleViewModel
+@{
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Rol Ekleme Sayfası</h1>
+
+<div class="card">
+    <h3 class="card-header">Rol Ekleme</h3>
+    <div class="card-body">
+        <form method="post">
+            <label>Rol Başlığı</label>
+            <input type="text" name="name" placeholder="Rol İsmi Giriniz.." class="form-control" />
+            <br />
+            <button class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Yeni Rolü Kaydet</button>
+        </form>
+    </div>
+</div>

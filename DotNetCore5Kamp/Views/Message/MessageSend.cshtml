@@ -1,0 +1,26 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "MessageSend";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Mesaj Oluşturma</h3>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("MessageSend", "Message", FormMethod.Post))
+        {
+            @Html.Label("Mesaj Konusu")
+            @Html.TextBoxFor(x => x.MessageTitle, new { @class = "form-control", @autocomplete="off", @placeholder="Mesaj Başlığı.." })
+            <br />
+            @Html.Label("Alıcının Mail Adresi")
+            <input type="email" class="form-control" placeholder="Alıcının Mail Adresi.." />
+            <br />
+            @Html.Label("Mesaj İçeriği")
+            @Html.TextAreaFor(x => x.MessageContent, new { @class = "form-control", @autocomplete = "off", @placeholder="Mesaj İçeriği.." })
+            <br />
+            <button class="btn btn-gradient-success">Mesajı Gönder</button>
+        }
+    </div>
+</div>

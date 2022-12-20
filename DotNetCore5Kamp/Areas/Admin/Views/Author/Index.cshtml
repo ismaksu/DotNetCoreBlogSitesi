@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Yazar AJAX Serialize/Deserialize İşlemleri</h4>
+<br />
+<button type="button" id="btnList" class="btn btn-primary">Yazar Listesi</button>
+<button type="button" id="btnListById" class="btn btn-secondary">ID'ye Göre Yazar</button>
+<br />
+<br />
+
+
+
+<div class="row">
+    <div class="card col-md-6">
+        <div class="card-body">
+            <div id="authorList">
+                Yazarlar
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-6">
+        <br />
+        <input id="authorId" type="text" class="form-control col-md-3" style="border-color: black; border-radius: 5px;" placeholder="ID Giriniz.." />
+        <div class="card-body">
+            <div id="authorListById">
+                ID'ye Göre Yazar
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card col-md-6">
+        <div class="card-body">
+            <input id="txtAuthorId" type="number" placeholder="Yazar ID" class="form-control" />
+            <br />
+            <input id="txtAuthorName" type="text" placeholder="Yazar Ad" class="form-control" />
+            <br />
+            <button type="button" id="btnAuthorAdd" class="btn btn-outline-success">Yazar Ekle</button>
+        </div>
+    </div>
+    <div class="card col-md-6">
+        <div class="card-body">
+            <input id="txtDeleteId" type="number" placeholder="Yazar ID" class="form-control col-md-3" />
+            <br />
+            <button type="button" id="btnAuthorDelete" class="btn btn-outline-danger">ID'ye Göre Yazar Sil</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card col-md-6">
+        <div class="card-body">
+            <input id="txtUpdateId" type="number" placeholder="Yazar ID" class="form-control col-md-3" />
+            <br />
+            <input id="txtUpdateName" type="text" placeholder="Yazar İsmi" class="form-control" />
+            <br />
+            <button type="button" id="btnAuthorUpdate" class="btn btn-outline-warning">ID'ye Göre Yazar Güncelle</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#btnList").click(function () {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/Author/AuthorList/",
+                success: function (func) {
+                    let w = jQuery.parseJSON(func);
+                    console.log(w);
+
+                    let tableHtml = "<table class=\"table table-hover\"> <tr> <th> Yazar ID </th> <th> Yazar Adı </th> </tr>";
+                    $.each(w, (index, value) => {
+                        tableHtml += `<tr><td>${value.ID}</td><td>${value.Name}</td></tr>`
+                    });
+                    tableHtml += "</table>";
+                    $("#authorList").html(tableHtml);
+                }
+            });
+        });
+
+        $("#btnListById").click(x => {
+            let id = $("#authorId").val();
+
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/Author/ListAuthorByID/",
+                data: { authorId: id }, //ActionResult içerisindeki aldığı parametreye değer ataması
+                success: function (func) {
+                    let a = jQuery.parseJSON(func);
+                    console.log(a);
+
+                    let getValue = `<table class="table table-hover"> <tr> <th> Yazar ID </th> <th> Yazar Ad </th> </tr> <tr> <td> <b> ${a.ID}</td><td>${a.Name}</td></tr></table>`;
+                    $("#authorListById").html(getValue);
+                }
+            });
+
+            console.log(id);
+        });
+
+        $("#btnAuthorAdd").click(function () {
+
+            let author = {
+                ID: $("#txtAuthorId").val(),
+                Name: $("#txtAuthorName").val()
+            };
+
+            $.ajax({
+                type: "Post",
+                url: "/Admin/Author/AddAuthor/",
+                data: author,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert("İşlem Başarılı");
+                }
+            });
+        });
+
+        $("#btnAuthorDelete").click(x => {
+            let id = $("#txtDeleteId").val();
+
+            $.ajax({
+                url: "/Admin/Author/DeleteAuthor/" + id,
+                type: "Post",
+                dataType: "json",
+                success: function (func) {
+                    alert("Silme İşlemi Başarılı");
+                }
+            });
+        });
+
+        $("#btnAuthorUpdate").click(function () {
+            let author = {
+                ID: $("#txtUpdateId").val(),
+                Name: $("#txtUpdateName").val()
+            };
+
+            $.ajax({
+                type: "Post",
+                url: "/Admin/Author/UpdateAuthor/",
+                data: author,
+                success: function (func) {
+                    alert("Güncelleme İşlemi Başarılı");
+                }
+            });
+        });
+    </script>
+}

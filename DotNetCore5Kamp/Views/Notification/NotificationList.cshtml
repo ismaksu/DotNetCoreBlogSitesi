@@ -1,0 +1,56 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+
+@{
+    ViewData["Title"] = "NotificationList";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="card col-md-10 mx-auto">
+    <div class="card-body">
+        <h4 class="card-title">Bildirimler</h4>
+        <br />
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Bildirim</th>
+                <th>Zaman</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                var totalH = Math.Round((DateTime.Now - item.NotificationDate).TotalHours);
+                var total = totalH.ToString();
+                string zamanTur = "saat önce.";
+                if (totalH > 48)
+                {
+                    total = item.NotificationDate.ToString("dd MMMM yyyy ~ HH:mm:ss");
+
+                    zamanTur = "";
+                }
+                else if (totalH <= 1)
+                {
+                    var totalM = Math.Round((DateTime.Now - item.NotificationDate).TotalMinutes);
+
+                    total = totalM.ToString();
+                    zamanTur = "dakika önce.";
+
+                    if (totalM <= 1)
+                    {
+                        var totalS = Math.Round((DateTime.Now - item.NotificationDate).TotalSeconds);
+
+                        total = totalS.ToString();
+                        zamanTur = "saniye önce.";
+                    }
+                }
+
+                <tr>
+                    <td><b>@item.NotificationID</b></td>
+                    <td>@item.NotificationTitle</td>
+                    <td>@total @zamanTur</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,16 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<a href="/Message/Inbox/" class="btn btn-outline-info">Geri Dön?</a>
+<br />
+<br />
+<div class="card">
+    <h4 class="card-header">@Model.MessageTitle</h4>
+    <div class="card-body">
+        <h6>@Model.MessageContent</h6>
+    </div>
+    <small class="card-footer"><i>@Model.MessageDate.ToShortDateString()</i></small>
+</div>

@@ -1,0 +1,21 @@
+﻿@using DotNetCore5Kamp.Models
+@model RoleUpdateViewModel
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <h3 class="card-header"></h3>
+    <div class="card-body">
+        <form method="post">
+            <label>Rol ID</label>
+            <input type="text" name="RoleId" value="@Model.RoleId" class="form-control" readonly="" />
+            <br />
+            <label>Rol Adı</label>
+            <input type="text" name="RoleName" value="@Model.RoleName" class="form-control" />
+            <br />
+            <button class="btn btn-primary" href="/Admin/AdminRole/UpdateRole/"><i class="fa fa-pencil-square-o"></i> &nbsp; Rolü Güncelle</button>
+        </form>
+    </div>
+</div>

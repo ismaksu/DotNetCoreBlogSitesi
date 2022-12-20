@@ -1,0 +1,66 @@
+﻿<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+                <h3>Hakkımızda</h3>
+                <p>Önceliğimiz insanların birbirleriyle bilgi paylaşabileceği ve manipülatif olmayan objektif yazılar paylaşabileceği özgür bir websitesi olmayı amaçlıyoruz.</p>
+                <div class="read">
+                    <a href="/About/Index/" class="btn btn-primary read-m">Daha Fazla..</a>
+                </div>
+            </div>
+            <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+
+                @await Component.InvokeAsync("BlogLast3Post")
+
+            </div>
+            <!-- subscribe -->
+            <div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
+                <h2>Yeni Paylaşımlardan Haberdar Olun!</h2>
+                <div class="tech-btm">
+                    <img src="~/BlogTema/images/banner1.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="tech-btm">
+                    <h4>Mail bültenimize abone olun!</h4>
+                    <p>Mail bültenimize abone olarak en yeni haberlerden ve bloglardan ilk siz haberdar olun! </p>
+                    <form method="post">
+                        <input id="mailInput1" type="email" placeholder="Mail Adresiniz" required="" name="Mail">
+                        <input id="submitButton1" type="submit" value="Abone Ol">
+                    </form>
+                </div>
+
+                <!-- //subscribe -->
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="footer-cpy text-center">
+            <div class="w3layouts-agile-copyrightbottom">
+                <p>
+                    © @DateTime.Now.Year ISM Blog. Tüm Hakları Saklıdır
+                </p>
+
+            </div>
+        </div>
+
+        <!-- //footer -->
+
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script type="text/javascript">
+
+            $('#submitButton1').click(function () {
+                let values = {
+                    Mail: $('#mailInput1').val()
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "/NewsLetter/SubscribeMail/",
+                    data: values,
+                    success: function (func) {
+                        let result = jQuery.parseJSON(func);
+                    }
+                });
+            })
+
+        </script>
+    </div>
+</footer>

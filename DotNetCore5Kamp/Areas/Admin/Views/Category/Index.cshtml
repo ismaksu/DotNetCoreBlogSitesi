@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<Category>
+ 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kategori Listesi</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Kategori Adı</th>
+                <th>İşlemler</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><b>@item.CategoryID</b></td>
+                    <td>@item.CategoryName</td>
+                    <td>
+                        <button id="btnDelete" onclick="submitControl(@item.CategoryID)" class="btn btn-outline-danger">
+                            <i class="fa fa-toggle-off rounded-left"></i>
+                            Pasif Yap
+                        </button> &nbsp;
+                        <a href="#" class="btn btn-warning">
+                            <i class="fa fa-edit rounded-right"></i>
+                            Düzenle
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <a class="btn btn-info" href="/Admin/Category/AddCategory/">Yeni Kategori</a>
+        <br />
+        <br />
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+
+</div>
+
+<script>
+    function submitControl(id) {
+        swal("Dikkat!", "Bu Kategoriyi Pasif Yapmak İstediğinize Emin Misiniz?",
+            {
+                icon: 'warning',
+                buttons: ['İptal', "Evet"],
+                dangerMode: true
+            })
+            .then((silinecek) => {
+                if (silinecek) {
+                    window.location.href = '/Admin/Category/DeleteCategory/' + id;
+                }
+            });
+    }
+</script>

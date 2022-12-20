@@ -1,0 +1,80 @@
+﻿@using EntityLayer.Concrete
+@model List<Message2>
+@{
+    ViewData["Title"] = "Sendbox";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<style>
+    tr {
+        cursor: pointer;
+    }
+</style>
+
+<div class="card">
+    <h3 class="card-header">Sendbox</h3>
+    <div class="card-body">
+        <h4 class="card-title">Giden Mesajlar</h4>
+
+        <table class="table table-hover">
+            <tr style="cursor: default !important;">
+                <th>#</th>
+                <th>Alıcı</th>
+                <th>Mesaj Başlığı</th>
+                <th>Mesaj İçeriği</th>
+                <th>Mesaj Tarihi</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                string msgTitle = item.MessageTitle;
+                string msgCont = item.MessageContent;
+                if (item.MessageTitle.Length > 30)
+                {
+                    msgTitle = item.MessageTitle.Substring(0, 30) + "..";
+                }
+                if (item.MessageContent.Length > 50)
+                {
+                    msgCont = item.MessageContent.Substring(0, 50) + "..";
+                }
+
+                var totalH = Math.Round((DateTime.Now - item.MessageDate).TotalHours);
+                var total = totalH.ToString();
+                string zamanTur = "saat önce.";
+                if (totalH > 48)
+                {
+                    total = item.MessageDate.ToString("dd MMMM yyyy ~ HH:mm:ss");
+
+                    zamanTur = "";
+                }
+                else if (totalH <= 1)
+                {
+                    var totalM = Math.Round((DateTime.Now - item.MessageDate).TotalMinutes);
+
+                    total = totalM.ToString();
+                    zamanTur = "dakika önce.";
+
+                    if (totalM <= 1)
+                    {
+                        var totalS = Math.Round((DateTime.Now - item.MessageDate).TotalSeconds);
+
+                        total = totalS.ToString();
+                        zamanTur = "saniye önce.";
+                    }
+                }
+
+                <tr onclick="window.location='/Message/MessageDetails/@item.MessageID/'">
+                    <td><b>@item.MessageID</b></td>
+                    <td>
+                        <img class="profile-pic" src="@item.ReceiverUser.AuthorImage" alt="image" />
+                        @item.ReceiverUser.AuthorName
+                    </td>
+                    <td>@msgTitle</td>
+                    <td>@msgCont</td>
+                    <td>@total @zamanTur </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <a href="/Message/MessageSend/" class="btn btn-gradient-info">Mesaj Oluştur</a>
+    </div>
+</div>

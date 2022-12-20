@@ -1,0 +1,51 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "BlogEdit";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Blog Düzenleme Sayfası</h3>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("BlogEdit", "Blog", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.AuthorID)
+            @Html.HiddenFor(x => x.BlogStat)
+
+            @Html.Label("Blog ID")
+            @Html.TextBoxFor(x => x.BlogID, new { @class = "form-control", @readonly = "true" })
+            <br />
+            <br />
+            @Html.Label("Blog Başlığı")
+            @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control", @placeholder = "Blog Başlığını Giriniz..", @autocomplete = "off", @spellcheck = "false" })
+            @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @style = "color: red; margin-bottom: 15px;" })
+            <br />
+            <br />
+            @Html.Label("Blog Görseli")
+            @Html.TextBoxFor(x => x.BlogImage, new { @class = "form-control", @placeholder = "Görsel URL'si..", @autocomplete = "off", @spellcheck = "false" })
+            @Html.ValidationMessageFor(x => x.BlogImage, "", new { @style = "color: red;" })
+            <br />
+            <br />
+            @Html.Label("Blog Küçük Görseli")
+            @Html.TextBoxFor(x => x.BlogThumbnail, new { @class = "form-control", @placeholder = "Küçük Görsel URL'si..", @autocomplete = "off", @spellcheck = "false" })
+            <br />
+            <br />
+            @Html.Label("Blog Kategorisi")
+            @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.categoryValues, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.Label("Blog İçeriği")
+            @Html.TextAreaFor(x => x.BlogContent, 15, 3, new { @class = "form-control", @placeholder = "Bir Blog Yazısı Oluşturun!", @autocomplete = "off" })
+            @Html.ValidationMessageFor(x => x.BlogContent, "", new { @style = "color: red; margin-bottom: 15px;" })
+            <br />
+            <br />
+            @Html.Label("Blog Oluşturulma Tarihi")
+            @Html.TextBoxFor(x => x.BlogCreationDate, new { @class = "form-control", @readonly = "true" })
+            <br />
+            <br />
+            <button class="btn btn-outline-success">Değişiklikleri Kaydet</button>
+        }
+    </div>
+</div>

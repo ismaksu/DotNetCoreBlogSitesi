@@ -1,0 +1,95 @@
+﻿@model List<EntityLayer.Concrete.AppRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ISM Blog | Admin Paneli</title>
+
+    <link href="~/adminLyt/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/adminLyt/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/adminLyt/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="~/adminLyt/css/animate.css" rel="stylesheet">
+    <link href="~/adminLyt/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox " style="box-shadow: 0 0 5px -1px black; border-radius: 7px;">
+                <div class="ibox-title" style="border-radius: 7px;">
+                    <h5>Roller  </h5>
+                </div>
+                <div class="ibox-content" style="border-radius: 7px;">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Rol Adı</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        <a href="/Admin/AdminRole/UpdateRole/@item.Id" class="btn btn-outline-warning"><i class="fa fa-pencil"></i> Düzenle</a> &nbsp;
+                                        <a href="/Admin/AdminRole/DeleteRole/@item.Id" class="btn btn-outline-danger"><i class="fa fa-times"></i> Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="/Admin/AdminRole/AddRole/" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp; Yeni Rol Ekle</a>
+                    <a href="/Admin/AdminRole/UserRoleList/" class="btn btn-primary"><i class="fa fa-id-badge"></i>&nbsp; Kullanıcı Rol Listesi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Mainly scripts -->
+    <script src="~/adminLyt/js/jquery-3.1.1.min.js"></script>
+    <script src="~/adminLyt/js/popper.min.js"></script>
+    <script src="~/adminLyt/js/bootstrap.js"></script>
+    <script src="~/adminLyt/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/adminLyt/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/adminLyt/js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/adminLyt/js/inspinia.js"></script>
+    <script src="~/adminLyt/js/plugins/pace/pace.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="~/adminLyt/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/adminLyt/js/demo/peity-demo.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+</body>
+
+</html>

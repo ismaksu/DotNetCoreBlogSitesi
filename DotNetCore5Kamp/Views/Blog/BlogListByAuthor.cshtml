@@ -1,0 +1,77 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByAuthor";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+@{
+    string[] blogDurum = { "Aktif", "Pasif" };
+    string durumString = "null";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Yazar Blogları Listesi</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Blog Başlığı</th>
+                <th>Blog Oluşturulma Tarihi</th>
+                <th>Kategorisi</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                @if (item.BlogStat)
+                {
+                    durumString = blogDurum[0];
+                }
+                else
+                {
+                    durumString = blogDurum[1];
+                }
+
+                <tr>
+                    <th>@item.BlogID</th>
+                    <td><a href="/Blog/BlogDetails/@item.BlogID">@item.BlogTitle</a></td>
+                    <td>@(((DateTime)item.BlogCreationDate).ToString("dd-MMMM-yyyy"))</td>
+                    <td><span class="badge bg-gradient-dark text-white">@item.Category.CategoryName</span></td>
+                    <td>@durumString</td>
+                    <td>
+                        <button onclick="swalFunc(@item.BlogID)" class="btn btn-gradient-danger">Sil</button> &nbsp;
+                        <a href="/Blog/BlogEdit/@item.BlogID" class="btn btn-gradient-warning">Düzenle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <a href="/Blog/BlogAdd/" class="btn btn-gradient-primary">Yeni Blog Oluştur</a>
+    </div>
+
+</div>
+
+<script>
+    function swalFunc(id) {
+        swal('Dikkat!', 'Bu blog yazısını silmek istediğinize emin misiniz?\nBu işlem geri alınamaz!', { buttons: ["İptal", "Eminim."], dangerMode: true, icon: "warning" })
+            .then((silinecekMi) => {
+                if (silinecekMi) {
+                    window.location.href = "/Blog/BlogDelete/" + id;
+                }
+            });
+    }
+</script>
+
+
+@*swal('Dikkat!', 'Bu blog yazısını silmek istediğinize emin misiniz?\nBu işlem geri alınamaz! ' + $('#silBtn').attr('name'), { buttons: ["İptal", "Eminim."], dangerMode: true, icon: "warning" })
+    .then((silinecekMi) => {
+        if (silinecekMi) {
+            window.location.href = "/Blog/BlogDelete/" + $('#silBtn').attr('name');
+        }
+    });*@

@@ -1,0 +1,116 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "NewMessage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ISM Admin | Mail Oluştur</title>
+
+    <link href="~/adminLyt/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/adminLyt/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/adminLyt/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="~/adminLyt/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="~/adminLyt/css/animate.css" rel="stylesheet">
+    <link href="~/adminLyt/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-primary compose-mail" href="/Admin/AdminMessage/NewMessage/">Mesaj Oluştur</a>
+                        <div class="space-25"></div>
+                        <h5>Sayfalar</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">16</span> </a></li>
+                            <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Önemli</a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
+                        </ul>
+                        <h5>Kategoriler</h5>
+                        <ul class="category-list" style="padding: 0">
+                            <li><a href="#"> <i class="fa fa-circle text-navy"></i> İş </a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Dökümanlar</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-primary"></i> Sosyal</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-info"></i> Tanıtımlar</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-warning"></i> Yıldızlılar</a></li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <div class="float-right tooltip-demo">
+                    <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslaklara taşı"><i class="fa fa-pencil"></i> Taslak</a>
+                    <a href="mailbox.html" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="İptal et"><i class="fa fa-times"></i> İptal</a>
+                </div>
+                <h2>
+                    Mesaj Oluştur
+                </h2>
+            </div>
+            <div class="mail-box">
+
+                <form method="post">
+
+                    <div class="mail-body">
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Kime:</label>
+
+                            <div class="col-sm-10"><input type="text" class="form-control" placeholder="Alıcının Mail Adresi.."></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Konu:</label>
+
+                            <div class="col-sm-10"><input type="text" class="form-control" name="MessageTitle" placeholder="Konu Başlığı.."></div>
+                        </div>
+                    </div>
+
+                    <div class="mail-text h-200">
+
+
+                        <div class="clearfix">
+                            <textarea class="form-control" placeholder="Mesajınızı Yazın.." name="MessageContent" style="height: 300px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="mail-body text-right tooltip-demo">
+                        <button class="btn btn-sm btn-primary" asp-action="NewMessage" href="/Admin/AdminMessage/NewMessage/"><i class="fa fa-reply"></i> Gönder</button>
+                        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mesajı iptal edin"><i class="fa fa-times"></i> İptal</a>
+                        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mesajı taslaklara taşıyın"><i class="fa fa-pencil"></i> Taslak</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="~/adminLyt/js/jquery-3.1.1.min.js"></script>
+    <script src="~/adminLyt/js/popper.min.js"></script>
+    <script src="~/adminLyt/js/bootstrap.js"></script>
+    <script src="~/adminLyt/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/adminLyt/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/adminLyt/js/inspinia.js"></script>
+    <script src="~/adminLyt/js/plugins/pace/pace.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="~/adminLyt/js/plugins/iCheck/icheck.min.js"></script>
+</body>
+
+</html>

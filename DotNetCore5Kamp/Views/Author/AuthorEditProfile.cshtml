@@ -1,0 +1,60 @@
+﻿@model UserUpdateViewModel
+@{
+    ViewData["Title"] = "AuthorEditProfile";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yazar Profili</h4>
+            <p class="card-description"> Düzenleme </p>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Yazar Kullanıcı Adı</label>
+                    <input type="text" asp-for="@Model.username" class="form-control" placeholder="Yazar Kullanıcı Adı Giriniz.." />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Yazar İsmi</label>
+                    <input type="text" asp-for="@Model.name" class="form-control" placeholder="Yazar Adını Giriniz.." />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Yazar Profil Fotoğrafı Resim Yolu</label>
+                    <input type="text" asp-for="@Model.imageurl" class="form-control" placeholder="Resim Yolu Giriniz.." />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Mail Adresi</label>
+                    <input type="email" asp-for="@Model.mail" class="form-control" placeholder="Mail Adresinizi Giriniz.." />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Şifre</label>
+                    <input type="password" asp-for="@Model.password" class="form-control" placeholder="Şifrenizi giriniz.." />
+                </div>
+                <div class="form-group">
+                    <label>Şifreyi Yeniden Giriniz</label>
+                    @Html.TextBox("password2", "", new { @class = "form-control", @type = "password", @placeholder = "Şifreyi Yeniden Giriniz.." })
+                </div>
+                <button type="submit" onclick="validatePassword()" class="btn btn-gradient-primary mr-2">Güncelle</button>
+                <button class="btn btn-light">İptal</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Şifreler Uyuşmuyor");
+        else
+            document.getElementById("password2").setCustomValidity('');
+    }
+</script>
+<script src="~/authorLyt/assets/js/file-upload.js"></script>
+<script src="~/authorLyt/assets/js/off-canvas.js"></script>
+<script src="~/authorLyt/assets/js/hoverable-collapse.js"></script>
+<script src="~/authorLyt/assets/js/misc.js"></script>
+
+@*@Html.TextBoxFor(x => x.AuthorImage, new { @type = "text", @class = "form-control file-upload-info", @placeholder = "Bir Resim Belirleyiniz.." })
+    @Html.ValidationMessageFor(x => x.AuthorImage, "", new { @style = "color: red;" })*@

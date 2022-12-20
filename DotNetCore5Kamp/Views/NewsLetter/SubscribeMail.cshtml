@@ -1,0 +1,30 @@
+﻿<div class="tech-btm">
+    <img src="~/BlogTema/images/banner1.jpg" class="img-fluid" alt="">
+</div>
+<div class="tech-btm">
+    <h4>Mail bültenimize abone olun!</h4>
+    <p>Mail bültenimize abone olarak en yeni haberlerden ve bloglardan ilk siz haberdar olun! </p>
+    <form method="post">
+        <input id="mailInput" type="email" placeholder="Mail Adresiniz" required="" name="Mail">
+        <input id="submitButton" type="submit" value="Abone Ol">
+    </form>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+
+    $('#submitButton').click(function () {
+        let values = {
+            Mail: $('#mailInput').val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/NewsLetter/SubscribeMail/",
+            data: values,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+            }
+        });
+    })
+
+</script>
